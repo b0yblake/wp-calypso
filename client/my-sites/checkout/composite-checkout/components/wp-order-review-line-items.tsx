@@ -3,7 +3,6 @@
  */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import {
 	CheckoutModal,
 	FormStatus,
@@ -24,6 +23,7 @@ import {
 	getCouponLineItemFromCart,
 	getCreditsLineItemFromCart,
 	isWpComProductRenewal,
+	styled,
 } from '@automattic/wpcom-checkout';
 import {
 	isDomainRegistration,
@@ -61,10 +61,11 @@ import getPriceTierForUnits from 'calypso/my-sites/plans/jetpack-plans/get-price
 
 import deleteIcon from './delete-icon.svg';
 
-const WPOrderReviewList = styled.ul< { theme?: Theme } >`
-	border-top: 1px solid ${ ( props ) => props.theme.colors.borderColorLight };
+const WPOrderReviewList = styled.ul< { theme?: Theme; isCompact?: boolean } >`
+	border-color: ${ ( props ) => props.theme.colors.borderColorLight };
+	border-top-width: ${ ( props ) => ( props.isCompact ? '0' : '1px' ) };
 	box-sizing: border-box;
-	margin: 20px 36px 20px 0;
+	margin: ${ ( props ) => ( props.isCompact ? '10px 0' : '20px 36px 20px 0' ) };
 	padding: 0;
 
 	.rtl & {
@@ -304,6 +305,7 @@ export function WPOrderReviewLineItems( {
 	className,
 	siteId,
 	isSummary,
+	isCompact,
 	removeProductFromCart,
 	removeCoupon,
 	onChangePlanLength,
@@ -312,6 +314,7 @@ export function WPOrderReviewLineItems( {
 	className?: string;
 	siteId?: number | undefined;
 	isSummary?: boolean;
+	isCompact?: boolean;
 	removeProductFromCart?: RemoveProductFromCart;
 	removeCoupon: RemoveCouponFromCart;
 	onChangePlanLength?: OnChangeItemVariant;
@@ -322,7 +325,10 @@ export function WPOrderReviewLineItems( {
 	const couponLineItem = getCouponLineItemFromCart( responseCart );
 
 	return (
-		<WPOrderReviewList className={ joinClasses( [ className, 'order-review-line-items' ] ) }>
+		<WPOrderReviewList
+			isCompact={ isCompact }
+			className={ joinClasses( [ className, 'order-review-line-items' ] ) }
+		>
 			{ responseCart.products.map( ( product ) => {
 				return (
 					<WPOrderReviewListItem key={ product.uuid }>
