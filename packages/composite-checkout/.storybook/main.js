@@ -2,6 +2,9 @@ const path = require( 'path' );
 const TranspileConfig = require( '@automattic/calypso-build/webpack/transpile' );
 
 module.exports = {
+	core: {
+		builder: "webpack5",
+	},
 	stories: [ '../demo/*.js' ],
 	addons: [ '@storybook/addon-actions', '@storybook/preset-scss' ],
 	typescript: {
