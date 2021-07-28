@@ -16,9 +16,8 @@ import getSitesItems from 'calypso/state/selectors/get-sites-items';
 import { isUserLoggedIn } from 'calypso/state/current-user/selectors';
 import { isEnabled } from '@automattic/calypso-config';
 
-// Used as placeholder / default domain to detect when we're looking at a relative url,
-// Note: also prevents exceptions from being raised
-const INVALID_URL = `https://__domain__.invalid`;
+// Used as default domain to detect when we're looking at a relative or invalid url
+const INVALID_URL = 'https://__domain__.invalid';
 
 type Host = string;
 
@@ -47,6 +46,11 @@ export function logmeinUrl( url: string, redirectTo = '' ): string {
 		return url;
 	}
 
+	// logmein doesn't work with http.
+	if ( newurl.protocol !== 'https:' ) {
+		return url;
+	}
+
 	const sites = Object.values( getSitesItems( reduxStore.getState() ) );
 
 	// We only want to logmein into valid sites that belong to the user (for now that is mapped simple sites)
@@ -58,9 +62,6 @@ export function logmeinUrl( url: string, redirectTo = '' ): string {
 	if ( ! isValid ) {
 		return url;
 	}
-
-	// logmein doesn't work with http.
-	newurl.protocol = 'https:';
 
 	// Set the param
 	newurl.searchParams.set( 'logmein', 'direct' );
