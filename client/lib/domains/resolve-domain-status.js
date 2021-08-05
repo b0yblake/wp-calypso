@@ -1,17 +1,10 @@
-/**
- * External dependencies
- */
 import { translate } from 'i18n-calypso';
 import moment from 'moment';
-
-/**
- * Internal dependencies
- */
-import { transferStatus, type as domainTypes } from './constants';
 import { isExpiringSoon } from 'calypso/lib/domains/utils/is-expiring-soon';
 import { isRecentlyRegistered } from 'calypso/lib/domains/utils/is-recently-registered';
 import { hasPendingGSuiteUsers } from 'calypso/lib/gsuite';
 import { shouldRenderExpiringCreditCard } from 'calypso/lib/purchases';
+import { transferStatus, type as domainTypes } from './constants';
 
 export function resolveDomainStatus(
 	domain,

@@ -194,6 +194,7 @@ module.exports = {
 				'client/jetpack-connect/**/*',
 				'client/landing/**/*',
 				'client/layout/**/*',
+				'client/lib/**/*',
 				'client/login/**/*',
 				'client/mailing-lists/**/*',
 				'client/my-sites/customer-home/**/*',

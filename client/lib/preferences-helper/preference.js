@@ -1,20 +1,13 @@
-/**
- * External dependencies
- */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { localize } from 'i18n-calypso';
 import { partial, isPlainObject } from 'lodash';
-
-/**
- * Internal dependencies
- */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { savePreference } from 'calypso/state/preferences/actions';
 import ArrayPreference from './array-preference';
-import ObjectPreference from './object-preference';
 import BooleanPreference from './boolean-preference';
-import StringPreference from './string-preference';
 import NumberPreference from './number-preference';
+import ObjectPreference from './object-preference';
+import StringPreference from './string-preference';
 
 class Preference extends Component {
 	render() {

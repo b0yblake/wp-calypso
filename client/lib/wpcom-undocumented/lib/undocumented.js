@@ -1,18 +1,11 @@
-/**
- * External dependencies
- */
+import config from '@automattic/calypso-config';
 import debugFactory from 'debug';
 import { camelCase, isPlainObject, omit, pick, snakeCase, set } from 'lodash';
 import { stringify } from 'qs';
-
-/**
- * Internal dependencies.
- */
-import Site from './site';
-import Me from './me';
-import config from '@automattic/calypso-config';
 import { getLanguage, getLocaleSlug } from 'calypso/lib/i18n-utils';
 import readerContentWidth from 'calypso/reader/lib/content-width';
+import Me from './me';
+import Site from './site';
 
 const debug = debugFactory( 'calypso:wpcom-undocumented:undocumented' );
 const { Blob } = globalThis; // The linter complains if I don't do this...?
@@ -135,7 +128,6 @@ Undocumented.prototype.updateMonitorSettings = function (
  *
  * @param {number} [siteId] The site ID
  * @param {Function} fn The callback function
- *
  */
 Undocumented.prototype.disconnectJetpack = function ( siteId, fn ) {
 	debug( '/jetpack-blogs/:site_id:/mine/delete query' );
@@ -307,7 +299,6 @@ Undocumented.prototype.settings = function ( siteId, method = 'get', data = {}, 
  *
  * @param {number|string} [siteId] The site ID
  * @param {Function} fn The callback function
- *
  * @returns {Promise} A promise that resolves when the request completes
  */
 Undocumented.prototype.getSiteKeyrings = function getSiteKeyrings( siteId, fn ) {
@@ -323,7 +314,6 @@ Undocumented.prototype.getSiteKeyrings = function getSiteKeyrings( siteId, fn ) 
  * 	- external_user_id {string} Optional. The external user id to link the site to
  * 	- service {string} service name for this keyring id
  * @param {Function} fn The callback function
- *
  * @returns {Promise} A promise that resolves when the request completes
  */
 Undocumented.prototype.createSiteKeyring = function createSiteKeyring( siteId, data, fn ) {
@@ -337,7 +327,6 @@ Undocumented.prototype.createSiteKeyring = function createSiteKeyring( siteId, d
  * @param {number} [keyringId] The keyring id to update,
  * @param {string} [externalUserId] The external user id to update on the site keyring
  * @param {Function} fn The callback function
- *
  * @returns {Promise} A promise that resolves when the request completes
  */
 Undocumented.prototype.updateSiteKeyring = function updateSiteKeyring(
@@ -363,7 +352,6 @@ Undocumented.prototype.updateSiteKeyring = function updateSiteKeyring(
  * @param {number} keyringId The keyring id
  * @param {string|null} externalUserId Optional, the external user id
  * @param {Function} fn The callback function
- *
  * @returns {Promise} A promise that resolves when the request completes
  */
 Undocumented.prototype.deleteSiteKeyring = function deleteSiteKeyring(
@@ -930,7 +918,6 @@ Undocumented.prototype.setCart = function ( cartKey, data, fn ) {
  * Get a list of the user's stored cards
  *
  * @param {Function} [fn] The callback function.
- *
  * @returns {Promise} Returns a promise when the `callback` is not provided.
  */
 Undocumented.prototype.getStoredCards = function ( fn ) {
@@ -943,7 +930,6 @@ Undocumented.prototype.getStoredCards = function ( fn ) {
  *
  * @param {object} query The query parameters
  * @param {Function} [fn] The callback function.
- *
  * @returns {Promise} Returns a promise when the `callback` is not provided.
  */
 Undocumented.prototype.getPaymentMethods = function ( query, fn ) {
@@ -1198,7 +1184,6 @@ Undocumented.prototype.createConnection = function (
  * @param {string}    message           Message for social media
  * @param {Array(int)} skippedConnections           Keyring connection ids to skip publicizing
  * @param {Function}      fn           Function to invoke when request is complete
- *
  * @returns {Promise} A promise representing the request
  */
 Undocumented.prototype.publicizePost = function (
@@ -1282,7 +1267,6 @@ Undocumented.prototype.updateCreditCard = function ( params, fn ) {
  *
  * @param {object} [data] The GET data
  * @param {Function} fn The callback function
- *
  * @returns {string} Url
  *
  * The data format is: {
@@ -1405,7 +1389,6 @@ Undocumented.prototype.usersNew = function ( query, fn ) {
  *
  * @param {object} query - an object with the following values: service, access_token, id_token (optional), signup_flow_name
  * @param {Function} fn - callback
- *
  * @returns {Promise} A promise for the request
  */
 Undocumented.prototype.usersSocialNew = function ( query, fn ) {
@@ -2208,7 +2191,6 @@ Undocumented.prototype.wordAdsApprove = function ( siteId ) {
  * @param {string} [plugin] -- .org plugin slug
  * @param {globalThis.File} [theme] -- theme zip to upload
  * @param {Function} [onProgress] -- called with upload progress status
- *
  * @returns {Promise} promise for handling result
  */
 Undocumented.prototype.initiateTransfer = function ( siteId, plugin, theme, onProgress ) {
@@ -2240,7 +2222,6 @@ Undocumented.prototype.initiateTransfer = function ( siteId, plugin, theme, onPr
  *
  * @param {object} query - Media query, supports 'path', 'search', 'max', 'page_handle', and 'source'
  * @param {Function} fn - The callback function
- *
  * @returns {Promise} promise for handling result
  */
 Undocumented.prototype.externalMediaList = function ( query, fn ) {
@@ -2254,7 +2235,6 @@ Undocumented.prototype.externalMediaList = function ( query, fn ) {
  *
  * @param {number} siteId -- the ID of the site being transferred
  * @param {number} transferId -- ID of the specific transfer
- *
  * @returns {Promise} promise for handling result
  */
 Undocumented.prototype.transferStatus = function ( siteId, transferId ) {
