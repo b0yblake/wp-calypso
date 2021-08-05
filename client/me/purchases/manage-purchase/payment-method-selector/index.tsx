@@ -1,33 +1,22 @@
-/**
- * External dependencies
- */
-import React, { useCallback, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useStripe } from '@automattic/calypso-stripe';
+import { Card } from '@automattic/components';
 import {
 	CheckoutProvider,
 	CheckoutPaymentMethods,
 	CheckoutSubmitButton,
 } from '@automattic/composite-checkout';
-import type { PaymentMethod } from '@automattic/composite-checkout';
-import { Card } from '@automattic/components';
 import { useTranslate } from 'i18n-calypso';
-import type { TranslateResult } from 'i18n-calypso';
-
-/**
- * Internal Dependencies
- */
+import React, { useCallback, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import QueryPaymentCountries from 'calypso/components/data/query-countries/payments';
+import FormInputCheckbox from 'calypso/components/forms/form-checkbox';
+import FormLabel from 'calypso/components/forms/form-label';
+import Gridicon from 'calypso/components/gridicon';
 import { useLocalizedMoment } from 'calypso/components/localized-moment';
 import Notice from 'calypso/components/notice';
-import { errorNotice, infoNotice, successNotice } from 'calypso/state/notices/actions';
 import { creditCardHasAlreadyExpired } from 'calypso/lib/purchases';
+import { errorNotice, infoNotice, successNotice } from 'calypso/state/notices/actions';
 import { getStoredPaymentAgreements } from 'calypso/state/stored-cards/selectors';
-import Gridicon from 'calypso/components/gridicon';
-import {
-	useHandleRedirectChangeError,
-	useHandleRedirectChangeComplete,
-} from './url-event-handlers';
 import {
 	assignPayPalProcessor,
 	assignNewCardProcessor,
@@ -35,9 +24,13 @@ import {
 } from './assignment-processor-functions';
 import getPaymentMethodIdFromPayment from './get-payment-method-id-from-payment';
 import TosText from './tos-text';
+import {
+	useHandleRedirectChangeError,
+	useHandleRedirectChangeComplete,
+} from './url-event-handlers';
+import type { PaymentMethod } from '@automattic/composite-checkout';
 import type { Purchase } from 'calypso/lib/purchases/types';
-import FormInputCheckbox from 'calypso/components/forms/form-checkbox';
-import FormLabel from 'calypso/components/forms/form-label';
+import type { TranslateResult } from 'i18n-calypso';
 
 import './style.scss';
 

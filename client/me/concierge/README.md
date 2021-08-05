@@ -11,6 +11,7 @@ rescheduling appointments.
 '/me/concierge/:siteSlug'; // redirects to calendar step for booking
 '/me/concierge/:siteSlug/:appointmentId/cancel'; // cancellation page for concierge appointment
 '/me/concierge/:siteSlug/:appointmentId/reschedule'; // rescheduling concierge appointments wizard
+
 ```
 
 ## Folder structure
