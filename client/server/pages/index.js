@@ -751,6 +751,14 @@ export default function pages() {
 		res.send( renderJsx( 'browsehappy', req.context ) );
 	} );
 
+	app.get( '/inline-help', ( req, res ) => {
+		req.context.clientData = config.clientData;
+		req.context.env = calypsoEnv;
+		req.context.entrypoint = req.getFilesForEntrypoint( 'entry-help' );
+		req.context.manifests = req.getAssets().manifests;
+		res.send( renderJsx( 'help', req.context ) );
+	} );
+
 	app.get( '/support-user', function ( req, res ) {
 		// Do not iframe
 		res.set( {
