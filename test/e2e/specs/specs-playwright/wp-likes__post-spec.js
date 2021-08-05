@@ -6,6 +6,7 @@ import {
 	NewPostFlow,
 	GutenbergEditorPage,
 	PublishedPostPage,
+	ParagraphBlock,
 	setupHooks,
 } from '@automattic/calypso-e2e';
 
@@ -49,33 +50,33 @@ describe( DataHelper.createSuiteTitle( 'Likes (Post)' ), function () {
 			await gutenbergEditorPage.enterText( quote );
 		} );
 
-		it( 'Publish and visit post', async function () {
-			publishedURL = await gutenbergEditorPage.publish( { visit: true } );
-			assert.strictEqual( publishedURL, await page.url() );
-		} );
+		// it( 'Publish and visit post', async function () {
+		// 	publishedURL = await gutenbergEditorPage.publish( { visit: true } );
+		// 	assert.strictEqual( publishedURL, await page.url() );
+		// } );
 
-		it( 'Like post', async function () {
-			publishedPostPage = new PublishedPostPage( page );
-			await publishedPostPage.likePost();
-		} );
+		// it( 'Like post', async function () {
+		// 	publishedPostPage = new PublishedPostPage( page );
+		// 	await publishedPostPage.likePost();
+		// } );
 
-		it( 'Unlike post', async function () {
-			await publishedPostPage.unlikePost();
-		} );
+		// it( 'Unlike post', async function () {
+		// 	await publishedPostPage.unlikePost();
+		// } );
 
-		it( 'Clear cookies', async function () {
-			await BrowserManager.clearAuthenticationState( page );
-		} );
+		// it( 'Clear cookies', async function () {
+		// 	await BrowserManager.clearAuthenticationState( page );
+		// } );
 
-		it( `Like post as ${ anotherUser }`, async function () {
-			publishedPostPage = new PublishedPostPage( page );
+		// it( `Like post as ${ anotherUser }`, async function () {
+		// 	publishedPostPage = new PublishedPostPage( page );
 
-			const loginFlow = new LoginFlow( page, anotherUser );
+		// 	const loginFlow = new LoginFlow( page, anotherUser );
 
-			// Clicking the Like button will bring up a new popup.
-			// `loginFromPopup` will observe for a popup event, grab the new popup and
-			// execute the login process on that page.
-			await Promise.all( [ loginFlow.logInFromPopup(), publishedPostPage.likePost() ] );
-		} );
+		// 	// Clicking the Like button will bring up a new popup.
+		// 	// `loginFromPopup` will observe for a popup event, grab the new popup and
+		// 	// execute the login process on that page.
+		// 	await Promise.all( [ loginFlow.logInFromPopup(), publishedPostPage.likePost() ] );
+		// } );
 	} );
 } );

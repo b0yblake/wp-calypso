@@ -1,5 +1,6 @@
-import assert from 'assert';
+import { expect } from '@jest/globals';
 import { Page, Frame, ElementHandle } from 'playwright';
+import { ParagraphBlock } from '../blocks';
 
 const selectors = {
 	// iframe and editor
@@ -76,21 +77,13 @@ export class GutenbergEditorPage {
 	 */
 	async enterTitle( title: string ): Promise< void > {
 		const sanitizedTitle = title.trim();
-		await this.setTitle( sanitizedTitle );
-		const readBack = await this.getTitle();
-		assert.strictEqual( readBack, sanitizedTitle );
-	}
-
-	/**
-	 * Fills the title block with text.
-	 *
-	 * @param {string} title Text to be used as the title.
-	 * @returns {Promise<void>} No return value.
-	 */
-	async setTitle( title: string ): Promise< void > {
 		const frame = await this.getEditorFrame();
+
 		await frame.click( selectors.editorTitle );
 		await frame.fill( selectors.editorTitle, title );
+
+		const readBack = await this.getTitle();
+		expect( readBack ).toStrictEqual( sanitizedTitle );
 	}
 
 	/**
@@ -113,9 +106,34 @@ export class GutenbergEditorPage {
 	 * @throws {assert.AssertionError} If text entered and text read back do not match.
 	 */
 	async enterText( text: string ): Promise< void > {
-		await this.setText( text );
-		const readBack = await this.getText();
-		assert.strictEqual( readBack, text );
+		const frame = await this.getEditorFrame();
+		await this.page.pause();
+		if ( await frame.isVisible( 'text="Type / to choose a block"' ) ) {
+			await frame.click( 'text="Type / to choose a block"' );
+		} else {
+			await frame.click(
+				`[aria-label="Empty block; start writing or type forward slash to choose a block"]`
+			);
+		}
+
+		const blockHandle = await frame.waitForSelector( `[data-title="Paragraph"]:last-of-type` );
+		const paragraphBlock = new ParagraphBlock( blockHandle, this.page );
+		await paragraphBlock.enterText( text );
+
+		// const lines = text.split( '\n' );
+
+		// for await (const line of lines) {
+		// 	await frame.click(
+		// 		`[aria-label="Empty block; start writing or type forward slash to choose a block"]`
+		// 	);
+		// 	const blockHandle = await frame.waitForSelector( `[data-title="Paragraph"]:last-of-type` );
+		// 	const paragraphBlock = new ParagraphBlock( blockHandle );
+		// 	await paragraphBlock.enterText( line );
+		// }
+
+		// await this.setText( text );
+		// const readBack = await this.getText();
+		// expect(readBack).toStrictEqual( text );
 	}
 
 	/**
