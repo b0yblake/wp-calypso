@@ -16,6 +16,7 @@ import { initializeAnalytics } from 'calypso/lib/analytics/init';
 import getSuperProps from 'calypso/lib/analytics/super-props';
 import { initializeCurrentUser } from 'calypso/lib/user/shared-utils';
 import analyticsMiddleware from 'calypso/state/analytics/middleware';
+import consoleDispatcher from 'calypso/state/console-dispatch';
 import { setCurrentUser } from 'calypso/state/current-user/actions';
 import currentUser from 'calypso/state/current-user/reducer';
 import {
@@ -39,6 +40,7 @@ async function AppBoot() {
 	const store = createStore(
 		rootReducer,
 		compose(
+			consoleDispatcher,
 			addReducerEnhancer,
 			httpDataEnhancer,
 			applyMiddleware( thunkMiddleware, wpcomApiMiddleware, analyticsMiddleware )
