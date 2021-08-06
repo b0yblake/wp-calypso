@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import InlineHelp from 'calypso/blocks/inline-help';
-import AsyncLoad from 'calypso/components/async-load';
+import SupportArticleDialog from 'calypso/blocks/support-article-dialog';
 import QuerySites from 'calypso/components/data/query-sites';
 import { initializeAnalytics } from 'calypso/lib/analytics/init';
 import getSuperProps from 'calypso/lib/analytics/super-props';
@@ -63,7 +63,7 @@ async function AppBoot() {
 			<>
 				<QuerySites allSites />
 				<InlineHelp />
-				<AsyncLoad require="calypso/blocks/support-article-dialog" placeholder={ null } />
+				<SupportArticleDialog />
 			</>
 		</Provider>,
 		document.getElementById( 'wpcom' )
