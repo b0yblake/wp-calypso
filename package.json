@@ -206,14 +206,14 @@
 		"@typescript-eslint/parser": "^4.29.0",
 		"@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
 		"@wordpress/base-styles": "^3.6.0",
-		"@wordpress/components": "^14.2.0",
-		"@wordpress/element": "^3.2.0",
+		"@wordpress/components": "^15.0.0",
+		"@wordpress/element": "^4.0.0",
 		"@wordpress/eslint-plugin": "^9.1.0",
-		"@wordpress/i18n": "^4.2.0",
-		"@wordpress/icons": "^4.1.0",
+		"@wordpress/i18n": "^4.2.1",
+		"@wordpress/icons": "^5.0.0",
 		"@wordpress/jest-preset-default": "^7.1.0",
 		"@wordpress/npm-package-json-lint-config": "^4.1.0",
-		"@wordpress/url": "^3.2.0",
+		"@wordpress/url": "^3.2.1",
 		"autoprefixer": "^10.2.5",
 		"babel-jest": "^27.0.6",
 		"babel-loader": "^8.2.2",
@@ -328,6 +328,6 @@
 		"eslint-nibble": "^7.0.0"
 	},
 	"resolutions": {
-		"**/newspack-components/@wordpress/base-styles": "3.4.3"
+		"**/newspack-components/@wordpress/base-styles": "3.6.0"
 	}
 }

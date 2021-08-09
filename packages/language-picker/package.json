@@ -32,9 +32,9 @@
 		"@automattic/search": "^1.0.0",
 		"@babel/runtime": "^7.14.8",
 		"@wordpress/base-styles": "^3.6.0",
-		"@wordpress/components": "^14.2.0",
-		"@wordpress/i18n": "^4.2.0",
-		"@wordpress/react-i18n": "^2.2.0"
+		"@wordpress/components": "^15.0.0",
+		"@wordpress/i18n": "^4.2.1",
+		"@wordpress/react-i18n": "^3.0.0"
 	},
 	"peerDependencies": {
 		"react": "^17.0.2",
