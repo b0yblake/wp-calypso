@@ -10,7 +10,6 @@ const MiniCSSWithRTLPlugin = require( './mini-css-with-rtl' );
  * @param  {string}    _.prelude                      String to prepend to each Sass file
  * @param  {object}    _.postCssOptions               PostCSS options
  * @param  {object}    _.cacheDirectory               Directory used to store the cache
- *
  * @returns {object}                                  webpack loader object
  */
 module.exports.loader = ( { includePaths, prelude, postCssOptions, cacheDirectory } ) => ( {
@@ -50,6 +49,7 @@ module.exports.loader = ( { includePaths, prelude, postCssOptions, cacheDirector
 				additionalData: prelude,
 				sassOptions: {
 					includePaths,
+					quietDeps: true,
 				},
 			},
 		},
@@ -63,7 +63,6 @@ module.exports.loader = ( { includePaths, prelude, postCssOptions, cacheDirector
  * @param  {string}   _.chunkFilename  filename pattern to use for CSS files
  * @param  {string}   _.filename       filename pattern to use for CSS chunk files
  * @param  {boolean}  _.minify         whether to minify CSS
- *
  * @returns {object[]}                 styling relevant webpack plugin objects
  */
 module.exports.plugins = ( { chunkFilename, filename, minify } ) => [
