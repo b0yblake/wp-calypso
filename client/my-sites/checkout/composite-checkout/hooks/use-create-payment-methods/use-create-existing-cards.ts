@@ -4,6 +4,7 @@
 import { useMemo } from 'react';
 import { createExistingCardMethod } from '@automattic/wpcom-checkout';
 import type { PaymentMethod } from '@automattic/composite-checkout';
+import type { StripeLoadingError } from '@automattic/calypso-stripe';
 
 /**
  * Internal dependencies
@@ -12,12 +13,20 @@ import useMemoCompare from '../use-memo-compare';
 import type { StoredCard } from '../../types/stored-cards';
 
 export default function useCreateExistingCards( {
+	isStripeLoading,
+	stripeLoadingError,
 	storedCards,
 	activePayButtonText = undefined,
 }: {
+	isStripeLoading: boolean;
+	stripeLoadingError: StripeLoadingError;
 	storedCards: StoredCard[];
 	activePayButtonText?: string;
 } ): PaymentMethod[] {
+	// The existing card payment methods do not require stripe, but the existing
+	// card processor does require it (for 3DS cards), so we wait to create the
+	// payment methods until stripe is loaded.
+	const shouldLoad = ! isStripeLoading && ! stripeLoadingError;
 	// Memoize the cards by comparing their stored_details_id values, in case the
 	// objects themselves are recreated on each render.
 	const memoizedStoredCards: StoredCard[] | undefined = useMemoCompare(
@@ -49,5 +58,6 @@ export default function useCreateExistingCards( {
 			) ?? []
 		);
 	}, [ memoizedStoredCards, activePayButtonText ] );
-	return existingCardMethods;
+
+	return shouldLoad ? existingCardMethods : [];
 }
