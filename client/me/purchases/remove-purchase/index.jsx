@@ -18,7 +18,13 @@ import CancelPurchaseForm from 'calypso/components/marketing-survey/cancel-purch
 import PrecancellationChatButton from 'calypso/components/marketing-survey/cancel-purchase-form/precancellation-chat-button';
 import { CANCEL_FLOW_TYPE } from 'calypso/components/marketing-survey/cancel-purchase-form/constants';
 import GSuiteCancellationPurchaseDialog from 'calypso/components/marketing-survey/gsuite-cancel-purchase-dialog';
-import { getIncludedDomain, getName, hasIncludedDomain, isRemovable } from 'calypso/lib/purchases';
+import {
+	getIncludedDomain,
+	getName,
+	getDisplayName,
+	hasIncludedDomain,
+	isRemovable,
+} from 'calypso/lib/purchases';
 import { isDataLoading } from '../utils';
 import {
 	isDomainMapping,
@@ -237,6 +243,7 @@ class RemovePurchase extends Component {
 	renderPlanDialogText() {
 		const { purchase, translate } = this.props;
 		const productName = getName( purchase );
+		const domainProductName = getDisplayName( purchase );
 		const includedDomainText = (
 			<p>
 				{ translate(
@@ -262,8 +269,11 @@ class RemovePurchase extends Component {
 						} )
 					}{ ' ' }
 					{ translate(
-						'You will not be able to reuse it again without purchasing a new subscription.',
-						{ comment: "'it' refers to a product purchased by a user" }
+						'You will not be able to reuse %(productName)s again without starting a new %(domainProductName)s subscription.',
+						{
+							args: { productName, domainProductName },
+							comment: "'it' refers to a product purchased by a user",
+						}
 					) }
 				</p>
 

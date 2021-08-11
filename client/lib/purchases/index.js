@@ -117,6 +117,9 @@ function getDisplayName( purchase ) {
 	if ( jetpackProductsDisplayNames[ purchase.productSlug ] ) {
 		return jetpackProductsDisplayNames[ purchase.productSlug ];
 	}
+	if ( isDomainRegistration( purchase ) || isDomainMapping( purchase ) ) {
+		return purchase.productName;
+	}
 	return getName( purchase );
 }
 
