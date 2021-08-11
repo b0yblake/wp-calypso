@@ -500,6 +500,8 @@ export default function useCreatePaymentMethods( {
 	} );
 
 	const existingCardMethods = useCreateExistingCards( {
+		isStripeLoading,
+		stripeLoadingError,
 		storedCards,
 	} );
 
