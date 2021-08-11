@@ -46,6 +46,7 @@ import { getCurrentUserId } from 'calypso/state/current-user/selectors';
 import RemoveDomainDialog from './remove-domain-dialog';
 import NonPrimaryDomainDialog from 'calypso/me/purchases/non-primary-domain-dialog';
 import VerticalNavItem from 'calypso/components/vertical-nav/item';
+import wpcom from 'calypso/lib/wp';
 
 /**
  * Style dependencies
@@ -119,13 +120,35 @@ class RemovePurchase extends Component {
 		this.setState( { isDialogVisible: false } );
 	};
 
-	removePurchase = () => {
+	removePurchase = async () => {
 		this.setState( { isRemoving: true } );
 
-		const { isDomainOnlySite, purchase, translate } = this.props;
+		const { isDomainOnlySite, purchase, shouldRevertAtomicSite, translate } = this.props;
+
+		const productName = getName( purchase );
+
+		if ( shouldRevertAtomicSite && config.isEnabled( 'atomic/automated-revert' ) ) {
+			try {
+				await wpcom.req.post( {
+					path: `/sites/${ purchase.siteId }/atomic/revert`,
+					apiNamespace: 'wpcom/v2',
+				} );
+			} catch {
+				this.setState( { isRemoving: false } );
+				this.closeDialog();
+
+				const errorMessage = translate(
+					'There was an error removing your %(productName)s plan. Please try again later or contact support.',
+					{
+						args: { productName },
+					}
+				);
+				this.props.errorNotice( errorMessage );
+				return;
+			}
+		}
 
 		this.props.removePurchase( purchase.id, this.props.userId ).then( () => {
-			const productName = getName( purchase );
 			const { purchasesError, purchaseListUrl } = this.props;
 
 			if ( purchasesError ) {
@@ -332,7 +355,7 @@ class RemovePurchase extends Component {
 			);
 		}
 
-		if ( this.props.isAtomicSite && ! isJetpackSearch( purchase ) ) {
+		if ( this.props.shouldRevertAtomicSite && ! config.isEnabled( 'atomic/automated-revert' ) ) {
 			return this.renderAtomicDialog( purchase );
 		}
 
@@ -384,12 +407,14 @@ class RemovePurchase extends Component {
 export default connect(
 	( state, { purchase } ) => {
 		const isJetpack = purchase && ( isJetpackPlan( purchase ) || isJetpackProduct( purchase ) );
+		const isAtomicSite = isSiteAutomatedTransfer( state, purchase.siteId );
 		return {
 			isDomainOnlySite: purchase && isDomainOnly( state, purchase.siteId ),
-			isAtomicSite: isSiteAutomatedTransfer( state, purchase.siteId ),
+			isAtomicSite,
 			isChatAvailable: isHappychatAvailable( state ),
 			isJetpack,
 			purchasesError: getPurchasesError( state ),
+			shouldRevertAtomicSite: isAtomicSite && ! isJetpackSearch( purchase ),
 			userId: getCurrentUserId( state ),
 		};
 	},
