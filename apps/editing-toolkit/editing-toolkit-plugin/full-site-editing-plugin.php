@@ -332,3 +332,12 @@ function load_universal_themes() {
 	require_once __DIR__ . '/wpcom-universal-themes/index.php';
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\load_universal_themes', 11 ); // load just after the Gutenberg plugin.
+
+/**
+ * WP.com-specific Site Editor changes.
+ * (Core Full Site Editing)
+ */
+function load_wpcom_site_editor() {
+	require_once __DIR__ . '/wpcom-site-editor/index.php';
+}
+add_action( 'plugins_loaded', __NAMESPACE__ . '\load_wpcom_site_editor', 11 ); // load just after the Gutenberg plugin.
