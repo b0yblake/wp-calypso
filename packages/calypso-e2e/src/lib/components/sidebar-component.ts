@@ -92,7 +92,7 @@ export class SidebarComponent {
 			// Explicitly select only the child headings and combine with the text matching engine.
 			// This works better than using CSS pseudo-classes like `:has-text` or `:text-matches` for text
 			// matching.
-			selector = `${ selectors.subheading } >> text="${ subitem }"`;
+			selector = `${ selectors.subheading } :text("${ subitem }"):visible`;
 			await this._click( selector );
 		}
 
