@@ -59,9 +59,20 @@ export class SidebarComponent {
 	 * @param {{[key: string]: string}} param0 Named object parameter.
 	 * @param {string} param0.item Plaintext representation of the top level heading.
 	 * @param {string} param0.subitem Plaintext representation of the child level heading.
+	 * @param {boolean} param0.skipWaitForContent whether to skip the verifying that the
+	 *        focus is back at the content area. some pages might require this to be skipped,
+	 *        like the new block widget page.
 	 * @returns {Promise<void>} No return value.
 	 */
-	async gotoMenu( { item, subitem }: { item?: string; subitem?: string } ): Promise< void > {
+	async gotoMenu( {
+		item,
+		subitem,
+		skipWaitForContent,
+	}: {
+		item?: string;
+		subitem?: string;
+		skipWaitForContent?: boolean;
+	} ): Promise< void > {
 		let selector;
 		const viewportName = getViewportName();
 
@@ -95,6 +106,8 @@ export class SidebarComponent {
 			selector = `${ selectors.subheading } >> text="${ subitem }"`;
 			await this._click( selector );
 		}
+
+		if ( skipWaitForContent ) return;
 
 		// Confirm the focus is now back to the content, not the sidebar.
 		await this.page.waitForSelector( `${ selectors.layout }.focus-content` );
