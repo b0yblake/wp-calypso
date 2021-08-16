@@ -276,7 +276,6 @@ export function WPNonProductLineItem( {
 						className="checkout-line-item__remove-product"
 						buttonType={ isDeleteButtonText ? 'text-button' : 'borderless' }
 						disabled={ isDisabled }
-						isDeleteButtonText={ isDeleteButtonText }
 						onClick={ () => {
 							setIsModalVisible( true );
 						} }
@@ -928,7 +927,6 @@ function WPLineItem( {
 						aria-label={ deleteButtonText }
 						buttonType={ isDeleteButtonText ? 'text-button' : 'borderless' }
 						disabled={ isDisabled }
-						isDeleteButtonText={ isDeleteButtonText }
 						onClick={ () => {
 							setIsModalVisible( true );
 							onEvent( {
