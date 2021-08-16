@@ -259,27 +259,16 @@ UndocumentedMe.prototype.newValidationAccountRecoveryEmail = function ( callback
 	return this.wpcom.req.post( args, callback );
 };
 
-UndocumentedMe.prototype.deletePurchase = function ( purchaseId, fn ) {
-	debug( '/me/purchases/{purchaseId}/delete' );
-
-	return this.wpcom.req.post(
-		{
-			path: `/me/purchases/${ purchaseId }/delete`,
-		},
-		fn
-	);
-};
-
 /**
  * Connect the current account with a social service (e.g. Google/Facebook).
  *
- * @param {object} An object containing the keys:
- *	{string} service - Social service associated with token, e.g. google.
- *  {string} access_token - OAuth2 Token returned from service.
- *  {string} id_token - (Optional) OpenID Connect Token returned from service.
- *  {string} user_name - (Optional) The user name associated with this connection, in case it's not part of id_token.
- *  {string} user_email - (Optional) The user name associated with this connection, in case it's not part of id_token.
- *  {string} redirect_to - The URL to redirect to after connecting.
+ * @param {object} config Config object.
+ * @param {string} config.service - Social service associated with token, e.g. google.
+ * @param {string} config.access_token - OAuth2 Token returned from service.
+ * @param {string} config.id_token - (Optional) OpenID Connect Token returned from service.
+ * @param {string} config.user_name - (Optional) The user name associated with this connection, in case it's not part of id_token.
+ * @param {string} config.user_email - (Optional) The user name associated with this connection, in case it's not part of id_token.
+ * @param {string} config.redirect_to - The URL to redirect to after connecting.
  * @param {Function} fn - The callback for the request.
  *
  * @returns {Promise} A promise for the request

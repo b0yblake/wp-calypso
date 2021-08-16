@@ -86,18 +86,26 @@ export const fetchUserPurchases = ( userId ) => ( dispatch ) => {
 
 export const removePurchase = ( purchaseId, userId ) => ( dispatch ) => {
 	return new Promise( ( resolve, reject ) => {
-		wpcom.me().deletePurchase( purchaseId, ( error, data ) => {
-			error ? reject( error ) : resolve( data );
-		} );
+		wpcom.req.post(
+			{
+				path: `/me/purchases/${ purchaseId }/delete`,
+				apiNamespace: 'wpcom/v2',
+			},
+			( error, data ) => {
+				error ? reject( error ) : resolve( data );
+			}
+		);
 	} )
 		.then( ( data ) => {
-			dispatch( {
-				type: PURCHASE_REMOVE_COMPLETED,
-				purchases: data.purchases,
-				userId,
-			} );
+			if ( data.status === 'completed' ) {
+				dispatch( {
+					type: PURCHASE_REMOVE_COMPLETED,
+					purchases: data.purchases,
+					userId,
+				} );
 
-			dispatch( requestHappychatEligibility() );
+				dispatch( requestHappychatEligibility() );
+			}
 		} )
 		.catch( ( error ) => {
 			dispatch( {
