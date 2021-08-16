@@ -121,6 +121,7 @@ function MasterbarCartContents( { selectedSiteSlug }: { selectedSiteSlug: string
 			<div className="masterbar-cart__content-wrapper">
 				<h2 className="masterbar-cart__title">{ translate( 'Cart' ) }</h2>
 				<WPOrderReviewLineItems
+					isDeleteButtonText
 					removeCoupon={ removeCoupon }
 					removeProductFromCart={ removeProductFromCart }
 				/>

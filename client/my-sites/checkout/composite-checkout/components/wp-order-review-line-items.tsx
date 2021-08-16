@@ -157,7 +157,16 @@ const LineItemPriceWrapper = styled.span< { theme?: Theme; isSummary?: boolean }
 `;
 
 const DeleteButton = styled( Button )< { theme?: Theme } >`
+	order: 0;
 	padding: 0 0 0 10px;
+
+	&.is-status-text-button {
+		color: ${ ( props ) => props.theme.colors.textColorLight };
+		font-size: 0.75rem;
+		margin-top: 4px;
+		order: 1;
+		padding: 0;
+	}
 
 	:hover rect {
 		fill: ${ ( props ) => props.theme.colors.error };
@@ -216,6 +225,7 @@ export function WPNonProductLineItem( {
 	className = null,
 	isSummary,
 	hasDeleteButton,
+	isDeleteButtonText,
 	removeProductFromCart,
 	createUserAndSiteBeforeTransaction,
 }: {
@@ -223,6 +233,7 @@ export function WPNonProductLineItem( {
 	className?: string | null;
 	isSummary?: boolean;
 	hasDeleteButton?: boolean;
+	isDeleteButtonText?: boolean;
 	removeProductFromCart?: () => void;
 	createUserAndSiteBeforeTransaction?: boolean;
 } ): JSX.Element {
@@ -263,13 +274,18 @@ export function WPNonProductLineItem( {
 				<>
 					<DeleteButton
 						className="checkout-line-item__remove-product"
-						buttonType="borderless"
+						buttonType={ isDeleteButtonText ? 'text-button' : 'borderless' }
 						disabled={ isDisabled }
+						isDeleteButtonText={ isDeleteButtonText }
 						onClick={ () => {
 							setIsModalVisible( true );
 						} }
 					>
-						<DeleteIcon uniqueID={ deleteButtonId } product={ label } />
+						{ isDeleteButtonText ? (
+							translate( 'Remove from cart' )
+						) : (
+							<DeleteIcon uniqueID={ deleteButtonId } product={ label } />
+						) }
 					</DeleteButton>
 
 					<CheckoutModal
@@ -293,6 +309,7 @@ export function WPNonProductLineItem( {
 export function WPOrderReviewLineItems( {
 	className,
 	siteId,
+	isDeleteButtonText,
 	isSummary,
 	removeProductFromCart,
 	removeCoupon,
@@ -301,6 +318,7 @@ export function WPOrderReviewLineItems( {
 }: {
 	className?: string;
 	siteId?: number | undefined;
+	isDeleteButtonText?: boolean;
 	isSummary?: boolean;
 	removeProductFromCart?: RemoveProductFromCart;
 	removeCoupon: RemoveCouponFromCart;
@@ -321,6 +339,7 @@ export function WPOrderReviewLineItems( {
 							allowVariants
 							siteId={ siteId }
 							hasDeleteButton={ canItemBeDeleted( product ) }
+							isDeleteButtonText={ isDeleteButtonText }
 							removeProductFromCart={ removeProductFromCart }
 							onChangePlanLength={ onChangePlanLength }
 							isSummary={ isSummary }
@@ -335,6 +354,7 @@ export function WPOrderReviewLineItems( {
 						lineItem={ couponLineItem }
 						isSummary={ isSummary }
 						hasDeleteButton={ ! isSummary }
+						isDeleteButtonText={ isDeleteButtonText }
 						removeProductFromCart={ removeCoupon }
 						createUserAndSiteBeforeTransaction={ createUserAndSiteBeforeTransaction }
 					/>
@@ -813,6 +833,7 @@ function WPLineItem( {
 	siteId,
 	className,
 	hasDeleteButton,
+	isDeleteButtonText,
 	removeProductFromCart,
 	onChangePlanLength,
 	isSummary,
@@ -823,6 +844,7 @@ function WPLineItem( {
 	siteId?: number | undefined;
 	className?: string;
 	hasDeleteButton?: boolean;
+	isDeleteButtonText?: boolean;
 	removeProductFromCart?: RemoveProductFromCart;
 	onChangePlanLength?: OnChangeItemVariant;
 	isSummary?: boolean;
@@ -904,8 +926,9 @@ function WPLineItem( {
 					<DeleteButton
 						className="checkout-line-item__remove-product"
 						aria-label={ deleteButtonText }
-						buttonType="borderless"
+						buttonType={ isDeleteButtonText ? 'text-button' : 'borderless' }
 						disabled={ isDisabled }
+						isDeleteButtonText={ isDeleteButtonText }
 						onClick={ () => {
 							setIsModalVisible( true );
 							onEvent( {
@@ -916,7 +939,11 @@ function WPLineItem( {
 							} );
 						} }
 					>
-						<DeleteIcon uniqueID={ deleteButtonId } product={ label } />
+						{ isDeleteButtonText ? (
+							translate( 'Remove from cart' )
+						) : (
+							<DeleteIcon uniqueID={ deleteButtonId } product={ label } />
+						) }
 					</DeleteButton>
 
 					<CheckoutModal
