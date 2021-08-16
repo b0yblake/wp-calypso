@@ -61,11 +61,11 @@ import getPriceTierForUnits from 'calypso/my-sites/plans/jetpack-plans/get-price
 
 import deleteIcon from './delete-icon.svg';
 
-const WPOrderReviewList = styled.ul< { theme?: Theme; isCompact?: boolean } >`
+const WPOrderReviewList = styled.ul< { theme?: Theme } >`
 	border-color: ${ ( props ) => props.theme.colors.borderColorLight };
-	border-top-width: ${ ( props ) => ( props.isCompact ? '0' : '1px' ) };
+	border-top-width: 1px;
 	box-sizing: border-box;
-	margin: ${ ( props ) => ( props.isCompact ? '10px 0' : '20px 36px 20px 0' ) };
+	margin: 20px 36px 20px 0;
 	padding: 0;
 
 	.rtl & {
@@ -294,7 +294,6 @@ export function WPOrderReviewLineItems( {
 	className,
 	siteId,
 	isSummary,
-	isCompact,
 	removeProductFromCart,
 	removeCoupon,
 	onChangePlanLength,
@@ -303,7 +302,6 @@ export function WPOrderReviewLineItems( {
 	className?: string;
 	siteId?: number | undefined;
 	isSummary?: boolean;
-	isCompact?: boolean;
 	removeProductFromCart?: RemoveProductFromCart;
 	removeCoupon: RemoveCouponFromCart;
 	onChangePlanLength?: OnChangeItemVariant;
@@ -314,10 +312,7 @@ export function WPOrderReviewLineItems( {
 	const couponLineItem = getCouponLineItemFromCart( responseCart );
 
 	return (
-		<WPOrderReviewList
-			isCompact={ isCompact }
-			className={ joinClasses( [ className, 'order-review-line-items' ] ) }
-		>
+		<WPOrderReviewList className={ joinClasses( [ className, 'order-review-line-items' ] ) }>
 			{ responseCart.products.map( ( product ) => {
 				return (
 					<WPOrderReviewListItem key={ product.uuid }>

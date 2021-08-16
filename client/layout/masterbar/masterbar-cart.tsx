@@ -123,7 +123,6 @@ function MasterbarCartContents( { selectedSiteSlug }: { selectedSiteSlug: string
 				<WPOrderReviewLineItems
 					removeCoupon={ removeCoupon }
 					removeProductFromCart={ removeProductFromCart }
-					isCompact
 				/>
 				<CheckoutSummaryTotal />
 				<div className="masterbar-cart__content-footer">
