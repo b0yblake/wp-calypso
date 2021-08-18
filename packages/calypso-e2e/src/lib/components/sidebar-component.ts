@@ -114,6 +114,16 @@ export class SidebarComponent {
 	}
 
 	/**
+	 * Clicks on the switch site menu item in the sidebar.
+	 *
+	 * @returns {Promise<void>} No return value.
+	 */
+	async switchSite(): Promise< void > {
+		await this.page.click( ':text("Switch Site")' );
+		await this.page.waitForSelector( `${ selectors.layout }.focus-sites` );
+	}
+
+	/**
 	 * Performs the underlying click action on a sidebar menu item.
 	 *
 	 * This method ensures the sidebar is in a stable, consistent state prior to executing its actions,

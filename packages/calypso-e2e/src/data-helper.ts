@@ -1,6 +1,7 @@
 import phrase from 'asana-phrase';
 import config from 'config';
 import { getViewportName } from './browser-helper';
+import { createTimestamp } from './media-helper';
 
 export { config };
 
@@ -15,6 +16,15 @@ export function getRandomInteger( min: number, max: number ): number {
 	min = Math.ceil( min );
 	max = Math.floor( max );
 	return Math.floor( Math.random() * ( max - min ) + min );
+}
+
+/**
+ * Generates a new name for test blog with prefix `e2eflowtesting`.
+ *
+ * @returns {string} Generated blog name.
+ */
+export function getBlogName(): string {
+	return `e2eflowtesting${ createTimestamp() }${ getRandomInteger( 100, 999 ) }`;
 }
 
 /**
