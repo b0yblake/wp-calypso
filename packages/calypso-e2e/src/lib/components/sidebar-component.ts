@@ -119,6 +119,14 @@ export class SidebarComponent {
 	 * @returns {Promise<void>} No return value.
 	 */
 	async switchSite(): Promise< void > {
+		const viewportName = getViewportName();
+
+		await this.waitForSidebarInitialization();
+
+		if ( viewportName === 'mobile' ) {
+			await this._openMobileSidebar();
+		}
+
 		await this.page.click( ':text("Switch Site")' );
 		await this.page.waitForSelector( `${ selectors.layout }.focus-sites` );
 	}
