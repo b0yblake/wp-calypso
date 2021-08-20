@@ -12,10 +12,18 @@ const selectors = {
 export class DomainsPage {
 	private page: Page;
 
+	/**
+	 * Constructs an instance of the component.
+	 *
+	 * @param {Page} page The underlying page.
+	 */
 	constructor( page: Page ) {
 		this.page = page;
 	}
 
+	/**
+	 * Clicks on the button to search for a domain to add to the current site.
+	 */
 	async addDomaintoSite(): Promise< void > {
 		await Promise.all( [
 			this.page.waitForNavigation(),

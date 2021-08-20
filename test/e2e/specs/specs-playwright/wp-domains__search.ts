@@ -4,7 +4,6 @@ import {
 	SidebarComponent,
 	DomainsPage,
 	DomainSearchComponent,
-	CartComponent,
 	setupHooks,
 	CartCheckoutPage,
 } from '@automattic/calypso-e2e';
@@ -56,14 +55,11 @@ describe( DataHelper.createSuiteTitle( 'Domains: Add ' ), function () {
 		await cartCheckoutPage.selectPaymentMethod( 'Credit Card' );
 	} );
 
-	it( 'Return to Upgrades > Domains', async function () {
-		await cartCheckoutPage.close();
-		await sidebarComponent.gotoMenu( { item: 'Upgrades', subitem: 'Domains' } );
+	it( 'Remove domain cart item', async function () {
+		await cartCheckoutPage.removeCartItem( selectedDomain );
 	} );
 
-	it( 'Remove domain from cart', async function () {
-		const cartComponent = new CartComponent( page );
-		await cartComponent.openCart();
-		await cartComponent.removeItem( selectedDomain );
+	it( 'Close secure payment without checking out', async function () {
+		await cartCheckoutPage.close();
 	} );
 } );
