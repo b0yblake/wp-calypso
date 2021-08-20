@@ -12,3 +12,4 @@ export * from './individual-purchase-page';
 export * from './cart-checkout-page';
 export * from './stats-page';
 export * from './site-import-page';
+export * from './domains-page';

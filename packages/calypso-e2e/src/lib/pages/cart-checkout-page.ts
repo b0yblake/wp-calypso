@@ -2,6 +2,9 @@ import { Page } from 'playwright';
 
 const selectors = {
 	modalContinueButton: 'button:text("Continue")',
+	closeCheckoutButton: `[title="Close Checkout"]`,
+
+	// Cart items
 	cartItem: ( itemName: string ) =>
 		`[data-testid="review-order-step--visible"] .checkout-line-item >> text=${ itemName.trim() }`,
 	removeCartItemButton: ( itemName: string ) =>
@@ -21,6 +24,17 @@ export class CartCheckoutPage {
 	 */
 	constructor( page: Page ) {
 		this.page = page;
+	}
+
+	async close(): Promise< void > {
+		await Promise.all( [
+			this.page.waitForNavigation(),
+			this.page.click( selectors.closeCheckoutButton ),
+		] );
+	}
+
+	async selectPaymentMethod( method: 'Credit Card' | 'Paypal' ): Promise< void > {
+		await this.page.check( `input[aria-label="${ method }"]` );
 	}
 
 	/**

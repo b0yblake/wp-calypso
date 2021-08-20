@@ -5,3 +5,5 @@ export * from './support-component';
 export * from './preview-component';
 export * from './notifications-component';
 export * from './site-select-component';
+export * from './domain-search-component';
+export * from './cart-component';
