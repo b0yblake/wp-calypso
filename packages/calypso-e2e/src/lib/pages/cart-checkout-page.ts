@@ -63,7 +63,21 @@ export class CartCheckoutPage {
 	 * @param {string} cartItemName Name of the item to remove from the cart.
 	 */
 	async removeCartItem( cartItemName: string ): Promise< void > {
+		const cartItems = await this.page.$$( `.checkout-line-item` );
 		await this.page.click( selectors.removeCartItemButton( cartItemName ) );
-		await this.page.click( selectors.modalContinueButton );
+
+		// If the only item in cart is removed, the checkout is automatically dismissed,
+		// navigating user back to the Upgrades > Plans page with the Plans tab selected.
+		if ( cartItems.length === 1 ) {
+			await Promise.all( [
+				this.page.waitForNavigation(),
+				this.page.click( selectors.modalContinueButton ),
+			] );
+		} else {
+			await Promise.all( [
+				this.page.waitForLoadState( 'load' ),
+				this.page.click( selectors.modalContinueButton ),
+			] );
+		}
 	}
 }

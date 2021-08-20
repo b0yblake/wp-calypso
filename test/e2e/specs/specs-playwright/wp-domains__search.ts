@@ -58,8 +58,4 @@ describe( DataHelper.createSuiteTitle( 'Domains: Add ' ), function () {
 	it( 'Remove domain cart item', async function () {
 		await cartCheckoutPage.removeCartItem( selectedDomain );
 	} );
-
-	it( 'Close secure payment without checking out', async function () {
-		await cartCheckoutPage.close();
-	} );
 } );
