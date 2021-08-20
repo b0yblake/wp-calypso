@@ -1,6 +1,6 @@
 import { Page } from 'playwright';
 
-export type PaymentMethods = 'Credit Card' | 'Paypal';
+export type PaymentMethods = 'Credit Card' | 'Paypal' | 'Free';
 
 const selectors = {
 	modalContinueButton: 'button:text("Continue")',
