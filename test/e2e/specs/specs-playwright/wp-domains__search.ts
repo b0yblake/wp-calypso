@@ -10,7 +10,6 @@ import {
 import { Page } from 'playwright';
 
 describe( DataHelper.createSuiteTitle( 'Domains: Add to current site' ), function () {
-	const phrase = DataHelper.randomPhrase();
 	let page: Page;
 
 	setupHooks( ( args ) => {
@@ -23,6 +22,9 @@ describe( DataHelper.createSuiteTitle( 'Domains: Add to current site' ), functio
 		siteType      | user               | paymentMethod
 		${ 'Simple' } | ${ 'defaultUser' } | ${ 'Credit Card' }
 	`( 'Domains: Add to current site ($siteType)', function ( { user, paymentMethod } ) {
+		e;
+		const phrase = DataHelper.randomPhrase();
+
 		let sidebarComponent: SidebarComponent;
 		let domainSearchComponent: DomainSearchComponent;
 		let cartCheckoutPage: CartCheckoutPage;
