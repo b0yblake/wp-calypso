@@ -45,6 +45,7 @@ export class DomainSearchComponent {
 	async selectDomain( keyword: string ): Promise< string > {
 		const selector = `${ selectors.resultItem }:has-text("${ keyword }")`;
 		const targetItem = await this.page.waitForSelector( selector );
+		// Heading element inside a given result contains the full domain name string.
 		const selectedDomain = await targetItem
 			.waitForSelector( 'h3' )
 			.then( ( el ) => el.innerText() );
