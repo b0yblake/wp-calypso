@@ -1110,7 +1110,7 @@ __metadata:
     jest: ^27.0.6
     lodash: ^4.17.21
     moment: ^2.26.0
-    newspack-blocks: "github:Automattic/newspack-blocks#chore/update-calypso-build"
+    newspack-blocks: "github:Automattic/newspack-blocks#v1.33.0"
     npm-run-all: ^4.1.5
     postcss: ^8.2.6
     puppeteer: ^3.0.4
@@ -27479,9 +27479,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"newspack-blocks@github:Automattic/newspack-blocks#chore/update-calypso-build":
-  version: 0.0.0
-  resolution: "newspack-blocks@https://github.com/Automattic/newspack-blocks.git#commit=663906beaab944466aa8129a72d1e620f5fc97f4"
+"newspack-blocks@github:Automattic/newspack-blocks#v1.33.0":
+  version: 1.33.0
+  resolution: "newspack-blocks@https://github.com/Automattic/newspack-blocks.git#commit=a10e45a23d8350b0927cbf9d3196420b5f6b9e2e"
   dependencies:
     "@stripe/stripe-js": ^1.15.0
     "@wordpress/a11y": ^2.9.0
@@ -27508,7 +27508,7 @@ fsevents@~2.1.2:
   dependenciesMeta:
     fsevents:
       optional: true
-  checksum: def6ae252cf03e2e9123d8bf9ca87fdbf52c9332bba8efa18a54faff86fe98f894380e2ed447f822780c52ebe22cbf5922ab8e3e9bfda343c337f9a4f337baf7
+  checksum: a8a36309af30eb1f6b69d246022dc930b739596c88440bccfd75a966ce6a895b2106bdc93e8c7795e021ba8508315f0e6be5bf213c9e92069ed3868a812d8693
   languageName: node
   linkType: hard
 
