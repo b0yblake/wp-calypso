@@ -11882,13 +11882,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer-json@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "buffer-json@npm:2.0.0"
-  checksum: 89c9fe7465426309aa54fbad1f8d76b78bfe94a404744877d77422cc910c88d8203184d7fda0b69b64fd157af88db82ff8128dbd9634bf88f3a0f2d17d1e95ec
-  languageName: node
-  linkType: hard
-
 "buffer-xor@npm:^1.0.3":
   version: 1.0.3
   resolution: "buffer-xor@npm:1.0.3"
@@ -12095,22 +12088,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cache-loader@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "cache-loader@npm:4.1.0"
-  dependencies:
-    buffer-json: ^2.0.0
-    find-cache-dir: ^3.0.0
-    loader-utils: ^1.2.3
-    mkdirp: ^0.5.1
-    neo-async: ^2.6.1
-    schema-utils: ^2.0.0
-  peerDependencies:
-    webpack: ^4.0.0
-  checksum: 7971982e5f5d3545db4e1da5614c26f2a3930f52d371159cd983254e72517be906e2d57d70abdf7299ebad73c8d5e248efc6211789475d907b2fe23c84188d50
-  languageName: node
-  linkType: hard
-
 "cacheable-lookup@npm:^2.0.0":
   version: 2.0.1
   resolution: "cacheable-lookup@npm:2.0.1"
@@ -12312,7 +12289,6 @@ __metadata:
     browser-filesaver: ^1.1.1
     browserslist-useragent: ^3.0.3
     bunyan: ^1.8.15
-    cache-loader: ^4.1.0
     chai: ^4.3.4
     chalk: ^4.0.0
     chrono-node: ^1.3.5
@@ -34866,7 +34842,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^2.0.0, schema-utils@npm:^2.6.1, schema-utils@npm:^2.6.5, schema-utils@npm:^2.6.6, schema-utils@npm:^2.7.0":
+"schema-utils@npm:^2.6.1, schema-utils@npm:^2.6.5, schema-utils@npm:^2.6.6, schema-utils@npm:^2.7.0":
   version: 2.7.1
   resolution: "schema-utils@npm:2.7.1"
   dependencies:
