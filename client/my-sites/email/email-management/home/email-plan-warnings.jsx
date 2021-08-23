@@ -10,7 +10,7 @@ import {
 	isTitanMailAccount,
 } from 'calypso/lib/emails';
 import { getGoogleAdminUrl } from 'calypso/lib/gsuite';
-import { emailManagementTitanSetupMailbox } from 'calypso/my-sites/email/paths';
+import { emailManagementTitanSetUpMailbox } from 'calypso/my-sites/email/paths';
 import getCurrentRoute from 'calypso/state/selectors/get-current-route';
 import { getSelectedSiteSlug } from 'calypso/state/ui/selectors';
 
@@ -23,7 +23,7 @@ class EmailPlanWarnings extends React.Component {
 	renderCTAForTitanUnusedMailboxes() {
 		const { currentRoute, domain, selectedSiteSlug, translate } = this.props;
 
-		const setupMailboxUrl = emailManagementTitanSetupMailbox(
+		const setupMailboxUrl = emailManagementTitanSetUpMailbox(
 			selectedSiteSlug,
 			domain.name,
 			currentRoute
