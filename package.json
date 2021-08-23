@@ -205,15 +205,15 @@
 		"@types/wordpress__editor": "^9.4.6",
 		"@typescript-eslint/eslint-plugin": "^4.29.0",
 		"@typescript-eslint/parser": "^4.29.0",
-		"@wordpress/base-styles": "^3.4.3",
-		"@wordpress/components": "^13.0.3",
-		"@wordpress/element": "^2.20.3",
-		"@wordpress/eslint-plugin": "^9.0.4",
-		"@wordpress/i18n": "^3.20.0",
-		"@wordpress/icons": "^2.10.3",
-		"@wordpress/jest-preset-default": "^7.0.3",
-		"@wordpress/npm-package-json-lint-config": "^4.0.3",
-		"@wordpress/url": "^2.22.2",
+		"@wordpress/base-styles": "^3.6.0",
+		"@wordpress/components": "^16.0.0",
+		"@wordpress/element": "^4.0.0",
+		"@wordpress/eslint-plugin": "^9.1.1",
+		"@wordpress/i18n": "^4.2.1",
+		"@wordpress/icons": "^5.0.1",
+		"@wordpress/jest-preset-default": "^7.1.0",
+		"@wordpress/npm-package-json-lint-config": "^4.1.0",
+		"@wordpress/url": "^3.2.1",
 		"autoprefixer": "^10.2.5",
 		"babel-jest": "^27.0.6",
 		"babel-loader": "^8.2.2",
@@ -329,6 +329,6 @@
 		"eslint-nibble": "^7.0.0"
 	},
 	"resolutions": {
-		"**/newspack-components/@wordpress/base-styles": "3.4.3"
+		"**/newspack-components/@wordpress/base-styles": "3.6.0"
 	}
 }
